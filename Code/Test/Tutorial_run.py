@@ -4,8 +4,8 @@ import os, sys
 # third party imports
 import numpy as np
 import tensorflow as tf
-assert tf.__version__.startswith('2.'), 'This tutorial assumes Tensorflow 2.0+'
-print(tf.__version__)
+#assert tf.__version__.startswith('2.'), 'This tutorial assumes Tensorflow 2.0+'
+#print(tf.__version__)
 
 # local imports
 import voxelmorph as vxm
@@ -66,3 +66,29 @@ x_test = np.pad(x_test, pad_amount, 'constant')
 
 # verify
 print('shape of training data', x_train.shape)
+
+# configure unet input shape (concatenation of moving and fixed images)
+ndim = 2
+unet_input_features = 2
+inshape = (*x_train.shape[1:], unet_input_features)
+
+# configure unet features 
+nb_features = [
+    [32, 32, 32, 32],         # encoder features
+    [32, 32, 32, 32, 32, 16]  # decoder features
+]
+
+# build model
+unet = vxm.networks.Unet(inshape=inshape, nb_features=nb_features)
+
+print('input shape: ', unet.input.shape)
+print('output shape:', unet.output.shape)
+
+# transform the results into a flow field.
+disp_tensor = tf.keras.layers.Conv2D(ndim, kernel_size=3, padding='same', name='disp')(unet.output)
+
+# check tensor shape
+print('displacement tensor:', disp_tensor.shape)
+
+# using keras, we can easily form new models via tensor pointers
+def_model = tf.keras.models.Model(unet.inputs, disp_tensor)
