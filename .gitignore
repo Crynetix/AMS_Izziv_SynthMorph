@@ -3,6 +3,11 @@ venv/
 *.nii.gz.
 __pycache__/
 scratch/*
+*.h5
+*.tar.gz
+*.npy
+*.npz
+*.gz
 
 # Distribution / packaging
 .Python
