@@ -13,6 +13,8 @@
     - Currently uses tensorflow v2.15
     - Some of the original example code is deprecated --> Changed some of it to be current
 
+- Successfully ran pretrained model
+
 # TO DO
 - Docker implementation
 - Build my own model
