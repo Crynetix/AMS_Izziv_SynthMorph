@@ -8,6 +8,8 @@ scratch/*
 *.npy
 *.npz
 *.gz
+*.csv
+*.zip
 
 # Distribution / packaging
 .Python

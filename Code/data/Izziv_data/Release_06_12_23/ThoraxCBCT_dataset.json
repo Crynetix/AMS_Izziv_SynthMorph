@@ -1,0 +1,480 @@
+{
+    "name": "ThoraxCBCT",
+    "release": "3",
+    "description": "Training/Validation/Test Data of Learn2Reg ThoraxCBCT Dataset. Please see https://learn2reg.grand-challenge.org/ for more information. ",
+    "licence": "THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE (\"CCPL\" OR \"LICENSE\"). THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR COPYRIGHT LAW IS PROHIBITED. BY EXERCISING ANY RIGHTS TO THE WORK PROVIDED HERE, YOU ACCEPT AND AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE. TO THE EXTENT THIS LICENSE MAY BE CONSIDERED TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND CONDITIONS.",
+    "reference": "Hugo, G. D., Weiss, E., Sleeman, W. C., Balik, S., Keall, P. J., Lu, J., & Williamson, J. F. (2016). Data from 4D Lung Imaging of NSCLC Patients (Version 2) [Data set]. The Cancer Imaging Archive. https://doi.org/10.7937/K9/TCIA.2016.ELN8YGLE; Hugo, G. D., Weiss, E., Sleeman, W. C., Balik, S., Keall, P. J., Lu, J., & Williamson, J. F. (2017). A longitudinal four-dimensional computed tomography and cone beam computed tomography dataset for image-guided radiation therapy research in lung cancer. In Medical Physics (Vol. 44, Issue 2, pp. 762\u2013771). Wiley. https://doi.org/10.1002/mp.12059; Balik, S., Weiss, E., Jan, N., Roman, N., Sleeman, W. C., Fatyga, M., Christensen, G. E., Zhang, C., Murphy, M. J., Lu, J., Keall, P., Williamson, J. F., & Hugo, G. D. (2013). Evaluation of 4-dimensional Computed Tomography to 4-dimensional Cone-Beam Computed Tomography Deformable Image Registration for Lung Cancer Adaptive Radiation Therapy. In International Journal of Radiation Oncology*Biology*Physics (Vol. 86, Issue 2, pp. 372\u2013379). Elsevier BV. PMCID: PMC3647023. https://doi.org/10.1016/j.ijrobp.2012.12.023; Roman, N. O., Shepherd, W., Mukhopadhyay, N., Hugo, G. D., & Weiss, E. (2012). Interfractional Positional Variability of Fiducial Markers and Primary Tumors in Locally Advanced Non-Small-Cell Lung Cancer During Audiovisual Biofeedback Radiotherapy. In International Journal of Radiation Oncology*Biology*Physics (Vol. 83, Issue 5, pp. 1566\u20131572). Elsevier BV. https://doi.org/10.1016/j.ijrobp.2011.10.051; Clark K, Vendt B, Smith K, Freymann J, Kirby J, Koppel P, Moore S, Phillips S, Maffitt D, Pringle M, Tarbox L, Prior F. The Cancer Imaging Archive (TCIA): Maintaining and Operating a Public Information Repository, Journal of Digital Imaging, Volume 26, Number 6, December, 2013, pp 1045-1057. DOI: 10.1007/s10278-013-9622-7",
+    "pairings": "paired",
+    "provided_data": {
+        "0": [
+            "image",
+            "keypoints01",
+            "keypoints02",
+            "mask"
+        ]
+    },
+    "registration_direction": {
+        "fixed": 1,
+        "moving": 0
+    },
+    "modality": {
+        "0": "FBCT",
+        "1": "CBCT",
+        "2": "CBCT"
+    },
+    "img_shift": {
+        "fixed": "followup",
+        "moving": "baseline"
+    },
+    "labels": {},
+    "tensorImageSize": {
+        "0": "3D"
+    },
+    "tensorImageShape": {
+        "0": [
+            256,
+            192,
+            192
+        ]
+    },
+    "numTraining": 42,
+    "numTest": 15,
+    "training": [
+        {
+            "image": "./imagesTr/ThoraxCBCT_0000_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0000_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0000_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0000_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0000_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0000_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0000_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0001_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0001_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0001_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0001_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0001_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0001_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0001_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0002_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0002_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0002_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0002_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0002_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0002_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0002_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0003_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0003_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0003_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0003_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0003_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0003_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0003_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0004_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0004_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0004_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0004_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0004_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0004_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0004_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0005_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0005_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0005_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0005_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0005_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0005_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0005_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0006_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0006_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0006_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0006_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0006_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0006_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0006_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0007_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0007_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0007_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0007_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0007_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0007_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0007_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0008_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0008_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0008_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0008_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0008_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0008_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0008_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0009_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0009_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0009_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0009_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0009_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0009_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0009_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0010_0000.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0010_0000.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0010_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0010_0001.nii.gz",
+            "keypoints01": "./keypoints01Tr/ThoraxCBCT_0010_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0010_0002.nii.gz",
+            "keypoints02": "./keypoints02Tr/ThoraxCBCT_0010_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0011_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0011_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0011_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0012_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0012_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0012_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0013_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0013_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTr/ThoraxCBCT_0013_0002.nii.gz"
+        }
+    ],
+    "test": [
+        {
+            "image": "./imagesTs/ThoraxCBCT_0014_0000.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0014_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0014_0001.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0014_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0014_0002.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0014_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0015_0000.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0015_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0015_0001.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0015_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0015_0002.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0015_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0016_0000.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0016_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0016_0001.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0016_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0016_0002.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0016_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0017_0000.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0017_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0017_0001.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0017_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0017_0002.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0017_0002.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0018_0000.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0018_0000.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0018_0001.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0018_0001.nii.gz"
+        },
+        {
+            "image": "./imagesTs/ThoraxCBCT_0018_0002.nii.gz",
+            "mask": "./masksTs/ThoraxCBCT_0018_0002.nii.gz"
+        }
+    ],
+    "numPairedTraining": 22,
+    "training_paired_images": [
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0000_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0000_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0001_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0001_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0002_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0002_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0003_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0003_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0004_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0004_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0005_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0005_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0006_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0006_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0007_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0007_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0008_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0008_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0009_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0009_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0010_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0010_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0000_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0000_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0001_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0001_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0002_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0002_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0003_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0003_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0004_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0004_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0005_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0005_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0006_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0006_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0007_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0007_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0008_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0008_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0009_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0009_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0010_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0010_0000.nii.gz"
+        }
+    ],
+    "numPairedTest": 10,
+    "test_paired_images": [
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0014_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0014_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0015_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0015_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0016_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0016_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0017_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0017_0000.nii.gz"
+        },        
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0018_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0018_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0014_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0014_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0015_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0015_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0016_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0016_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0017_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0017_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0018_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0018_0000.nii.gz"
+        }
+    ],
+    "numRegistration_val": 6,
+    "registration_val": [
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0011_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0011_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0012_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0012_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0013_0001.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0013_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0011_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0011_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0012_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0012_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTr/ThoraxCBCT_0013_0002.nii.gz",
+            "moving": "./imagesTr/ThoraxCBCT_0013_0000.nii.gz"
+        }
+    ],
+    "numRegistration_test": 10,
+    "registration_test": [
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0014_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0014_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0015_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0015_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0016_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0016_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0017_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0017_0000.nii.gz"
+        },        
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0018_0001.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0018_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0014_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0014_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0015_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0015_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0016_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0016_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0017_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0017_0000.nii.gz"
+        },
+        {
+            "fixed": "./imagesTs/ThoraxCBCT_0018_0002.nii.gz",
+            "moving": "./imagesTs/ThoraxCBCT_0018_0000.nii.gz"
+        }
+    ]
+}
