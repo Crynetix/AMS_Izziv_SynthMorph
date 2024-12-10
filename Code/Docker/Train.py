@@ -10,7 +10,7 @@ import voxelmorph as vxm
 # -----------------------
 # Hardcoded Parameters
 # -----------------------
-DATA_DIR = "/app/data"  # directory containing the JSON and data subfolders
+DATA_DIR = "..\data\Izziv_data\Release_06_12_23"  # directory containing the JSON and data subfolders
 JSON_PATH = os.path.join(DATA_DIR, "ThoraxCBCT_dataset.json")
 EPOCHS = 50
 STEPS_PER_EPOCH = 100
@@ -28,12 +28,13 @@ with open(JSON_PATH, 'r') as f:
 
 training_pairs = data_info.get("training_paired_images", [])
 # Filter out pairs with ThoraxCBCT_0000 to exclude broken images
+
 filtered_pairs = []
 for pair in training_pairs:
     fixed_path = pair["fixed"]
     moving_path = pair["moving"]
-    if "0000" not in fixed_path and "0000" not in moving_path:
-        filtered_pairs.append((moving_path, fixed_path))
+    filtered_pairs.append((moving_path, fixed_path))
+
 
 if len(filtered_pairs) == 0:
     raise ValueError("No valid training pairs found after filtering.")
@@ -98,7 +99,7 @@ nb_features = [
 
 vxm_model = vxm.networks.VxmDense(
     inshape=inshape,
-    nb_features=nb_features,
+    nb_unet_features=nb_features,
     int_steps=0  # no diffeomorphic integration steps for now
 )
 
