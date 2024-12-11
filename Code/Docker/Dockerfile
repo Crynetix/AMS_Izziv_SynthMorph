@@ -1,5 +1,5 @@
 # Use the NVIDIA CUDA base image with CUDA 11.8, cuDNN 8, and Ubuntu 22.04
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+FROM tensorflow/tensorflow:2.15.0-gpu
 
 # Set environment variables to suppress prompts during installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -25,7 +25,8 @@ WORKDIR /app
 COPY requirements.txt /app/
 
 # Install Python dependencies
-RUN python3 -m pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir wandb==0.15.11
 
 # Copy the rest of your application code into the container
 COPY . /app
@@ -33,5 +34,8 @@ COPY . /app
 # Set the default command to bash
 CMD ["/bin/bash"]
 
+
+#used for the final docker container where everything runs automatically
 # Set the entrypoint to your training script
-ENTRYPOINT ["python3", "train.py"]
+#ENTRYPOINT ["python3", "train.py"]
+#ENTRYPOINT ["python3", test.py]
