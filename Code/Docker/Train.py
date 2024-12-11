@@ -10,10 +10,10 @@ import voxelmorph as vxm
 # -----------------------
 # Hardcoded Parameters
 # -----------------------
-DATA_DIR = "..\data\Izziv_data\Release_06_12_23"  # directory containing the JSON and data subfolders
+DATA_DIR = "/app/data"  # directory containing the JSON and data subfolders
 JSON_PATH = os.path.join(DATA_DIR, "ThoraxCBCT_dataset.json")
 EPOCHS = 50
-STEPS_PER_EPOCH = 100
+STEPS_PER_EPOCH = 10
 BATCH_SIZE = 4
 MODEL_DIR = os.path.join(DATA_DIR, "models")
 GPU_ID = '0'

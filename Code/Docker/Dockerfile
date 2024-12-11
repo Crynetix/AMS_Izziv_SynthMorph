@@ -13,7 +13,6 @@ RUN apt-get update && \
         build-essential \
         wget \
         git \
-        nibabel \
     && rm -rf /var/lib/apt/lists/*
 
 # Upgrade pip
@@ -35,4 +34,4 @@ COPY . /app
 CMD ["/bin/bash"]
 
 # Set the entrypoint to your training script
-ENTRYPOINT ["python3", "train_voxelmorph.py"]
+ENTRYPOINT ["python3", "train.py"]
