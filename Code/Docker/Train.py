@@ -27,13 +27,15 @@ os.environ["TF_GPU_ALLOCATOR"] = "cuda_malloc_async"
 ##################
 # WANDB INIT     #
 ##################
+wandb.login(key = "73b7638455edcf4aa24699fa3ee6d3445074b620")
+
 # Initialize a W&B run with some default configs. You can override these from CLI or W&B UI.
 wandb.init(project="voxelmorph_training", config={
-    "epochs": 100,
-    "steps_per_epoch": 25,
+    "epochs": 250,
+    "steps_per_epoch": 40,
     "batch_size": 1,
     "learning_rate": 0.0001,
-    "downsample_factor": 1.0,
+    "downsample_factor": 0.5,
     "normalize": True
 })
 config = wandb.config  # shorthand
@@ -115,6 +117,9 @@ val_gen = data_generator(validation_pairs, config.batch_size, normalize=config.n
 # Infer shape from one volume
 test_vol = load_nifti(training_pairs[0][0], normalize=config.normalize, downsample_factor=config.downsample_factor)
 inshape = test_vol.shape[:-1]
+
+print(f"Training image shape: {inshape}")
+
 nb_features = [
     [16, 32, 32, 32],
     [32, 32, 32, 32, 32, 16, 16]
@@ -129,9 +134,11 @@ vxm_model = vxm.networks.VxmDense(
 losses = [
     vxm.losses.NCC().loss,
     vxm.losses.Grad('l2').loss,
-    tf.keras.losses.MeanSquaredError(),
+    # tf.keras.losses.MeanSquaredError(),
 ]
-loss_weights = [1.0, 0.01, 0.1]
+# loss_weights = [1.0, 0.01, 0.1]
+loss_weights = [1.0, 0.01]
+
 
 vxm_model.compile(
     optimizer=tf.keras.optimizers.Adam(learning_rate=config.learning_rate),
