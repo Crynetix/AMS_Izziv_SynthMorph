@@ -10,7 +10,22 @@ scratch/*
 *.gz
 *.csv
 *.zip
-data/Release_06_12_23
+data/
+Literature/
+.github/
+deformable-registration/
+My_voxelmorph/
+scipts/
+Test/
+voxelmorph/
+setup.python
+helper_functions.py
+citations.bib
+Notes/
+Reports/
+Instructions.txt
+
+
 
 # Distribution / packaging
 .Python

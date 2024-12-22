@@ -2,44 +2,47 @@
 
 import os
 import json
+import argparse
 import numpy as np
 import nibabel as nib
 import tensorflow as tf
 import voxelmorph as vxm
 
-############################
-# ENV SETUP
-############################
-# Select GPU if needed, else comment it out
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-os.environ["TF_GPU_ALLOCATOR"] = "cuda_malloc_async"
+def parse_args():
+    parser = argparse.ArgumentParser(description="Run model inference and output deformation fields.")
+    parser.add_argument(
+        "--weights",
+        type=str,
+        required=True,
+        help="Path to the trained model weights (e.g., /app/data/models/.../voxelmorph_model.h5)."
+    )
+    parser.add_argument(
+        "--subset",
+        type=str,
+        default="registration_val",
+        help="Key in the JSON file indicating which pairs to use (e.g., registration_val, registration_test)."
+    )
+    parser.add_argument(
+        "--json",
+        type=str,
+        default="/app/data/ThoraxCBCT_dataset.json",
+        help="Path to the JSON file that contains the test pairs."
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default="/app/output",
+        help="Directory to save the displacement fields (nii.gz)."
+    )
+    parser.add_argument(
+        "--gpu",
+        type=str,
+        default="0",
+        help="Select which GPU to use (e.g., 0 or 1). Set to '' to disable GPU."
+    )
+    return parser.parse_args()
 
-############################
-# PATH SETUP
-############################
-DATA_DIR = "/app/data"
-OUTPUT_DIR = "/app/output"  # Mounted directory for output displacement fields
-JSON_PATH = os.path.join(DATA_DIR, "ThoraxCBCT_dataset.json")
 
-MODEL_DIR = os.path.join(DATA_DIR, "models/2024-12-17/run_03")
-MODEL_WEIGHTS = os.path.join(MODEL_DIR, "voxelmorph_model_epoch_100.h5")  # adjust if needed
-
-if not os.path.exists(OUTPUT_DIR):
-    os.makedirs(OUTPUT_DIR)
-
-############################
-# LOAD DATA INFO
-############################
-with open(JSON_PATH, 'r') as f:
-    data_info = json.load(f)
-
-test_pairs = data_info.get("registration_val", [])
-if not test_pairs:
-    raise ValueError("No test pairs found in the JSON file.")
-
-############################
-# UTILITY FUNCTIONS
-############################
 def load_nifti(path, normalize=True):
     img = nib.load(path)
     vol = img.get_fdata()
@@ -50,68 +53,80 @@ def load_nifti(path, normalize=True):
     return vol
 
 def extract_id_from_filename(filepath):
-    # filepath example: /app/data/imagesTr/ThoraxCBCT_0011_0001.nii.gz
-    # We want to extract 0011_0001 from "ThoraxCBCT_0011_0001.nii.gz"
+    # Example: "/app/data/imagesTr/ThoraxCBCT_0011_0001.nii.gz" -> "0011_0001"
     base = os.path.basename(filepath)
-    # base = ThoraxCBCT_0011_0001.nii.gz
-    # Remove prefix "ThoraxCBCT_"
-    name = base.replace("ThoraxCBCT_", "")
-    # name = 0011_0001.nii.gz
-    name = name.replace(".nii.gz", "")
-    # name = 0011_0001
+    name = base.replace("ThoraxCBCT_", "").replace(".nii.gz", "")
     return name
 
-############################
-# LOAD MODEL
-############################
-# Infer input shape from the first pair's fixed image
-first_fixed_path = os.path.join(DATA_DIR, test_pairs[0]["fixed"].lstrip("./"))
-fixed_vol = load_nifti(first_fixed_path)
-inshape = fixed_vol.shape[:-1]
 
-nb_features = [
-    [16, 32, 32, 32],
-    [32, 32, 32, 32, 32, 16, 16]
-]
+def main():
+    args = parse_args()
+    
+    # Setup environment
+    if args.gpu:
+        os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
+    else:
+        # If empty, means we don't use any GPU
+        os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+    os.environ["TF_GPU_ALLOCATOR"] = "cuda_malloc_async"
 
-vxm_model = vxm.networks.VxmDense(
-    inshape=inshape,
-    nb_unet_features=nb_features,
-    int_steps=0
-)
+    # Ensure output directory exists
+    if not os.path.exists(args.output):
+        os.makedirs(args.output)
 
-vxm_model.load_weights(MODEL_WEIGHTS)
+    # Load the JSON file
+    with open(args.json, 'r') as f:
+        data_info = json.load(f)
 
-############################
-# RUN INFERENCE AND SAVE FIELDS
-############################
-for i, pair in enumerate(test_pairs):
-    moving_path = os.path.join(DATA_DIR, pair["moving"].lstrip("./"))
-    fixed_path = os.path.join(DATA_DIR, pair["fixed"].lstrip("./"))
+    test_pairs = data_info.get(args.subset, [])
+    if not test_pairs:
+        raise ValueError(f"No pairs found under the key '{args.subset}' in the JSON file.")
 
-    # Load volumes
-    moving_vol = load_nifti(moving_path, normalize=True)
-    fixed_vol = load_nifti(fixed_path, normalize=True)
+    # Infer shape from the first fixed image
+    first_fixed_path = os.path.join(os.path.dirname(args.json), test_pairs[0]["fixed"].lstrip("./"))
+    fixed_vol = load_nifti(first_fixed_path)
+    inshape = fixed_vol.shape[:-1]
 
-    # Predict displacement field
-    inputs = [moving_vol[np.newaxis, ...], fixed_vol[np.newaxis, ...]]
-    pred = vxm_model.predict(inputs)
+    # Build model
+    nb_features = [
+        [16, 32, 32, 32],
+        [32, 32, 32, 32, 32, 16, 16]
+    ]
+    vxm_model = vxm.networks.VxmDense(
+        inshape=inshape,
+        nb_unet_features=nb_features,
+        int_steps=0
+    )
 
-    # pred[1] contains the displacement field of shape (1, X, Y, Z, 3)
-    flow = pred[1][0, ...]
+    print(f"Loading weights from: {args.weights}")
+    vxm_model.load_weights(args.weights)
 
-    # Extract IDs for naming
-    fixed_id = extract_id_from_filename(fixed_path)
-    moving_id = extract_id_from_filename(moving_path)
+    # For each pair, run inference and save displacement field
+    for i, pair in enumerate(test_pairs):
+        moving_path = os.path.join(os.path.dirname(args.json), pair["moving"].lstrip("./"))
+        fixed_path = os.path.join(os.path.dirname(args.json), pair["fixed"].lstrip("./"))
 
-    # According to naming scheme: disp_<fixed>_<moving>.nii.gz
-    disp_filename = f"disp_{fixed_id}_{moving_id}.nii.gz"
-    disp_path = os.path.join(OUTPUT_DIR, disp_filename)
+        # Load volumes
+        moving_vol = load_nifti(moving_path)
+        fixed_vol = load_nifti(fixed_path)
 
-    # Save displacement field as NIfTI
-    disp_nii = nib.Nifti1Image(flow, np.eye(4))
-    nib.save(disp_nii, disp_path)
+        # Predict
+        inputs = [moving_vol[np.newaxis, ...], fixed_vol[np.newaxis, ...]]
+        pred = vxm_model.predict(inputs)
 
-    print(f"Saved displacement field for pair {i}: {disp_path}")
+        flow = pred[1][0, ...]  # shape (X, Y, Z, 3)
 
-print("All displacement fields have been saved.")
+        # Construct output filename
+        fixed_id = extract_id_from_filename(fixed_path)
+        moving_id = extract_id_from_filename(moving_path)
+        disp_filename = f"disp_{fixed_id}_{moving_id}.nii.gz"
+        disp_path = os.path.join(args.output, disp_filename)
+
+        nib.save(nib.Nifti1Image(flow, np.eye(4)), disp_path)
+        print(f"Saved deformation field: {disp_path}")
+
+    print("All deformation fields have been saved.")
+
+
+if __name__ == "__main__":
+    main()
