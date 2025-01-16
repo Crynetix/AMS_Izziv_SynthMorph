@@ -1,0 +1,3 @@
+[submodule "modules/L2R"]
+	path = modules/L2R
+	url = https://github.com/MDL-UzL/L2R.git
