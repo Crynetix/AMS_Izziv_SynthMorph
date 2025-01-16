@@ -121,6 +121,35 @@ python3 test.py --help
 
 V lokalni mapi (zunaj containerja), ki je montirana kot ```/app/output```, dobimo ```.nii.gz``` datoteke z deformacijskimi polji.
 
+## 5. Validacija rezultatov
+
+Za test slik je uporabljen testni docker iz lst gitlaba
+
+Navodila za prenos in zagon:
+
+Kloniraj testni repozitorij
+
+```bash
+git clone https://gitlab.lst.fe.uni-lj.si/domenP/deformable-registration.git
+```
+
+Buildaj docker image
+```bash
+docker build -t my-deformable-image .
+```
+
+Zaženi testni docker
+```bash
+docker run \
+    --rm \
+    -u $UID:$UID \
+    -v ./path/to/registered/images:/input \
+    -v ./path/to/desired/output:/output/ \
+    -v ./path/to/data/json:/workspace/data \
+    gitlab.lst.fe.uni-lj.si:5050/domenp/deformable-registration \
+    python evaluation.py -v
+```
+
 ## 5. Rezultati
 
 ```
