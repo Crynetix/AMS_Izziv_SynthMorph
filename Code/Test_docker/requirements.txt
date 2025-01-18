@@ -1,4 +1,0 @@
-nibabel
-numpy
-scipy
-evalutils
